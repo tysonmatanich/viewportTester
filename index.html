@@ -1,0 +1,320 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style type="text/css">@-webkit-viewport{width:device-width}@-moz-viewport{width:device-width}@-ms-viewport{width:device-width}@-o-viewport{width:device-width}@viewport{width:device-width}</style>
+    <script type="text/javascript">
+        /* Fix for IE Mobile 10.0 */
+        if (navigator.userAgent.match(/IEMobile\/10\.0/)) {
+            var msViewportStyle = document.createElement("style");
+            msViewportStyle.appendChild(document.createTextNode("@-ms-viewport{width:auto!important}"));
+            document.getElementsByTagName("head")[0].appendChild(msViewportStyle);
+        }
+    </script>
+    <title>ViewportTester</title>
+    <link href="http://fonts.googleapis.com/css?family=Libre+Baskerville" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+        html {
+            overflow-y: scroll;
+        }
+
+        body {
+            color: #fff;
+            background-color: #333029;
+            font-family: 'Libre Baskerville', serif;
+            font-size: 110%;
+            line-height: 1.75em;
+        }
+
+        .main {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Header
+        ==================================================*/
+        header {
+            border-bottom: 5px dashed #2A1E0E;
+            padding-top: 1em;
+        }
+
+        @media all and (min-height: 34.375em) {
+            header {
+                padding-bottom: 1em;
+                margin-bottom: 2em;
+            }
+        }
+
+        h1 { }
+
+        h2 {
+            color: #D8671F;
+        }
+
+        /* Main content
+        ==================================================*/
+        main { }
+
+        @media all and (min-width: 9000px) {
+            .instructions {
+                margin-bottom: 4em;
+            }
+        }
+
+        /* Links
+        --------------------------------------------------*/
+        a {
+            color: #D8671F;
+            text-decoration: none;
+            border-bottom: 1px dotted #ae5319;
+        }
+
+        a.button {
+            display: inline-block;
+            margin-top: 0.5em;
+            padding: 0.75em 1em;
+            color: #fff;
+            background-color: #008000;
+            border: 0;
+            border-radius: 0.75em 0 0.75em 0;
+            font-weight: bold;
+            cursor: pointer;
+            -webkit-transition: background-color 0.3s ease-in, color 0.3s ease-in;
+	        -moz-transition: background-color 0.3s ease-in, color 0.3s ease-in;
+	        -ms-transition: background-color 0.3s ease-in, color 0.3s ease-in;
+	        -o-transition: background-color 0.3s ease-in, color 0.3s ease-in;
+	        transition: background-color 0.3s ease-in, color 0.3s ease-in;
+        }
+
+        a.button:hover {
+            background-color: #006000;
+        }
+
+        /* Customize section
+        ==================================================*/
+        @media all and (min-width: 9000px) {
+            .customize {
+                margin-top: 3em;
+                padding-bottom: 2em;
+            }
+        }
+
+        /* Customize link
+        --------------------------------------------------*/
+        .customize > a {
+            display: block;
+            position: relative;
+        }
+        
+        .customize > a:after {
+            content: "+";
+            position: absolute;
+            right: 0;
+        }
+
+        .customize.expanded > a:after {
+            content: "-";
+        }
+
+        /* Customize form
+        --------------------------------------------------*/
+        #customize {
+            display: none;
+        }
+
+        #customize > div {
+            padding-top: 1em;
+        }
+
+        @media all and (min-width: 400px) {
+            #customize > div {
+                float: left;
+                width: 48%;
+                margin-right: 2%;
+            }
+        }
+
+        #customize label {
+            display: block;
+        }
+
+        select,
+        input {
+            width: 100%;
+            font-size: 0.875em;
+        }
+
+        /* Footer
+        ==================================================*/ 
+        footer {
+            margin-top: 2em;
+            border-top: 5px dashed #2A1E0E;
+            font-size: 0.875em;
+        }
+
+        @media all and (min-width: 500px) {
+            footer {
+                padding-top: 1em;
+            }
+        }
+
+        /* Clear
+        ==================================================*/ 
+        .clear {
+            float: none !important;
+            clear: both !important;
+            height: 0 !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <header>
+            <h1>ViewportTester</h1>
+            <h2>A viewport size bookmarklet.</h2>
+        </header>
+        <main>
+            <noscript>
+                <p>Sorry, this page requires JavaScript.</p>
+            </noscript>
+            <section class="instructions">
+                <p>Drag the button to your bookmarks → 
+                    <a id="target" href="#" class="button">ViewportTester</a></p>
+            </section>
+            <section class="info">
+                <p>ViewportTester displays the viewport width and height values straight from within CSS media queries.</p>
+                <p>Unfortunately there is no known way of detecting browsers' zoom levels. So when zoomed it can be off by a fraction of a pixel. It is still work in progress but wanted to get it into your hands.</p>
+            </section>
+            <section class="customize">
+                <a href="#customize">Customize it</a>
+                <div id="customize">
+                    <div>
+                        <label for="position">Position</label>
+                        <select id="position">
+                            <option>top-left</option>
+                            <option selected="selected">top-right</option>
+                            <option>bottom-right</option>
+                            <option>bottom-left</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="layout">Layout</label>
+                        <select id="layout">
+                            <option>stacked</option>
+                            <option selected>side-by-side</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="textColor">Text color</label>
+                        <input id="textColor" type="text" value="#ffffff" />
+                    </div>
+                    <div>
+                        <label for="backgroundColor">Background color</label>
+                        <input id="backgroundColor" type="text" value="#008000" />
+                    </div>
+                    <div>
+                        <label for="fontFamily">Font-family</label>
+                        <input id="fontFamily" type="text" value="sans-serif" />
+                    </div>
+                    <div>
+                        <label for="fontSize">Font-size</label>
+                        <input id="fontSize" type="text" value="14px" />
+                    </div>
+                    <div>
+                        <label for="opacity">Opacity</label>
+                        <input id="opacity" type="text" value="0.9" />
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </section>
+        </main>
+        <footer>
+            <p>Get or fork <a href="http://github.com/tysonmatanich/viewportSize">source</a>. Created by <a href="http://twitter.com/tysonmatanich">@tysonmatanich</a></p>
+        </footer>
+    </div>
+    <!--Third party scripts and code linked to or referenced from this website are licensed to you by the parties that own such code.-->
+    <script type="text/javascript" src="http://i.s-microsoft.com/en-us/home/shared/templates/Scripts/Lib/modernizr.js?v1"></script>
+    <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("a[href=#customize]").click(function () {
+                // Toggle customize pannel
+                if ($("#customize").is(":visible")) {
+                    $("#customize").slideUp();
+                    $(".customize").removeClass("expanded");
+                } else {
+                    $("#customize").slideDown();
+                    $(".customize").addClass("expanded");
+                }
+                return false;
+            });
+
+            $("#target").mousedown(function () {
+                // Update bookmarklet href
+                var bookmarklet = generateBookmarklet(bookmarkletSettings);
+                $("#target").attr("href", "javascript:" + bookmarklet);
+            });
+
+            $("#position, #layout, #textColor, #backgroundColor, #fontFamily, #fontSize, #opacity").change(function () {
+                updateLocal();
+            });
+
+            updateLocal();
+        });
+
+        var updateLocal = function () {
+            updateSettings(bookmarkletSettings);
+            var bookmarklet = generateBookmarklet(bookmarkletSettings);
+            eval(bookmarklet);
+        };
+
+        var bookmarkletSettings = {};
+
+        var updateSettings = function (settings) {
+            settings.position = $("#position").val();
+            settings.layout = $("#layout").val();
+            settings.textColor = $("#textColor").val();
+            settings.backgroundColor = $("#backgroundColor").val();
+            settings.fontFamily = $("#fontFamily").val();
+            settings.fontSize = $("#fontSize").val();
+            settings.opacity = Number($("#opacity").val());
+        };
+
+        var generateBookmarklet = function (settings) {
+            updateSettings(settings);
+            var bookmarklet = "";
+            bookmarklet += "(function(window){";
+            bookmarklet += "window.viewportTesterSettings={";
+            bookmarklet += "position:'" + settings.position + "',";
+            bookmarklet += "layout:'" + settings.layout + "',";
+            bookmarklet += "textColor:'" + settings.textColor + "',";
+            bookmarklet += "backgroundColor:'" + settings.backgroundColor + "',";
+            bookmarklet += "fontFamily:'" + settings.fontFamily + "',";
+            bookmarklet += "fontSize:'" + settings.fontSize + "',";
+            bookmarklet += "opacity:'" + settings.opacity + "'";
+            bookmarklet += "};";
+            bookmarklet += "var s=document.createElement('script');";
+            bookmarklet += "s.type='text/javascript';";
+
+            bookmarklet += "s.src='https://raw.github.com/tysonmatanich/viewportTester/master/viewportTester.js?v='+(Math.random()+'').replace('.','');";
+
+            bookmarklet += "document.getElementsByTagName('body')[0].appendChild(s);";
+            bookmarklet += "})(this);";
+            return bookmarklet;
+        }
+    </script>
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-6050963-1']);
+        _gaq.push(['_setDomainName', 'matanich.com']);
+        _gaq.push(['_trackPageview']);
+        (function () {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+</script>
+</body>
+</html>
