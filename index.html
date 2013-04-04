@@ -196,7 +196,8 @@
             </section>
             <section class="info">
                 <p>ViewportTester displays the viewport width and height values straight from within CSS media queries.</p>
-                <p>Unfortunately there is no known way of detecting browsers' zoom levels. So when zoomed it can be off by a fraction of a pixel. It is still work in progress but wanted to get it into your hands.</p>
+                <p>Unfortunately there's no known way of detecting browsers' zoom levels. So when zoomed, it can be off by a fraction of a pixel. It's work in progress but wanted to get it into your hands ASAP.</p>
+                <p><a href="http://www.matanich.com/2013/01/07/viewport-size/">Learn more</a> about viewports, inconsistencies between browsers, and know how to <a href="https://github.com/tysonmatanich/viewportSize">detect size</a> using JavaScript.</p>
             </section>
             <section class="customize">
                 <a href="#customize">Customize it</a>
@@ -309,7 +310,7 @@
             bookmarklet += "var s=document.createElement('script');";
             bookmarklet += "s.type='text/javascript';";
 
-            bookmarklet += "s.src='https://raw.github.com/tysonmatanich/viewportTester/master/viewportTester.js?v='+(Math.random()+'').replace('.','');";
+            bookmarklet += "s.src='http://tysonmatanich.github.com/viewportTester/viewportTester.js?v='+(Math.random()+'').replace('.','');";
 
             bookmarklet += "document.getElementsByTagName('body')[0].appendChild(s);";
             bookmarklet += "})(this);";

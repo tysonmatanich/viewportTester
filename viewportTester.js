@@ -21,11 +21,12 @@
         var horz = settings.position.substring(i + 1);
 
         // Defaults
-        css += selector + ' { position: absolute; position: fixed; ' + vert + ': 0; ' + horz + ': 0; z-index: 9999999999999; background-color: ' + settings.backgroundColor + '; color: ' + settings.textColor + '; opacity: ' + settings.opacity + '; filter: alpha(opacity=' + (settings.opacity * 100) + '); font-family: ' + settings.fontFamily + '; font-size: ' + settings.fontSize + '; }';
-        css += selector + ' > div { padding: 0.375em; }';
+        css += selector + ' { line-height: 2em; position: absolute; position: fixed; ' + vert + ': 0; ' + horz + ': 0; z-index: 9999999999999; padding-' + horz + ': 2em; background-color: ' + settings.backgroundColor + '; color: ' + settings.textColor + '; opacity: ' + settings.opacity + '; filter: alpha(opacity=' + (settings.opacity * 100) + '); font-family: ' + settings.fontFamily + '; font-size: ' + settings.fontSize + '; }';
+        css += selector + ' > div { padding: 0 0.375em; }';
         css += selector + ' > div + div { padding-top: 0; }';
         css += selector + ':hover { opacity: 1; filter: alpha(opacity=100); }';
         css += selector + ':hover { opacity: 1; filter: alpha(opacity=100); }';
+        css += selector + ' a { position: absolute; top: 0; ' + horz + ': 0; bottom: 0; padding: 0.188em 0.188em 0; border: 0; margin: 0; font-size: 2em; cursor: pointer; opacity: 0.5; filter: alpha(opacity=50); color: ' + settings.backgroundColor + '; background-color: ' + settings.textColor + '; }';
 
         if (!stacked) {
             css += selector + ' > div { display: inline-block; }';
@@ -61,16 +62,27 @@
             heightElement.innerHTML = "Height: ";
         }
 
+        var linkElement = document.createElement("a");
+        linkElement.href = "http://tysonmatanich.github.com/viewportTester/";
+        linkElement.innerHTML = "*";
+
         mainElement.appendChild(widthElement);
         mainElement.appendChild(heightElement);
+        mainElement.appendChild(linkElement);
 
         document.getElementsByTagName("body")[0].appendChild(mainElement);
     };
 
     var removeExistingElement = function (id) {
         var existingElement = document.getElementById(id);
-        if (existingElement != null && typeof existingElement.remove === "function") {
-            existingElement.remove();
+        if(existingElement != null){
+            if (typeof existingElement.remove === "function") {
+                existingElement.remove();
+            } else if (typeof existingElement.removeNode === "function") {
+                existingElement.removeNode(true);
+            } else if (typeof existingElement.parentNode.removeChild === "function") {
+                existingElement.parentNode.removeChild(existingElement);
+            }
         }
     };
 
