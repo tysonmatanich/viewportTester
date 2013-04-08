@@ -2,7 +2,7 @@
 
 ViewportTester displays the viewport width and height values straight from within CSS media queries.
 
-**Use:** http://tysonmatanich.github.com/viewportTester/
+**Use:** http://tysonmatanich.github.io/viewportTester/
 
 * Author: Tyson Matanich - http://matanich.com
 * License: MIT
