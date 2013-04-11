@@ -90,7 +90,7 @@
         var css = '';
 
         // In range
-        for (var i = start; i < end; i++) {
+        for (var i = start; i <= end; i++) {
             css += '@media screen and (min-' + distance + ': ' + i + 'px) { ' + selector + ':after { content: "' + i + 'px"; } }';
         }
 
